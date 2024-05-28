@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { User } from "./User";
 import { selectCount } from "./selector";
-import { increment, resetValue } from "./slice/counterSlice";
+import { decrement, increment, resetValue } from "./slice/counterSlice";
 
 const BasketPage = () => {
   const count = useSelector(selectCount);
@@ -13,6 +13,10 @@ const BasketPage = () => {
 
   const add = () => {
     dispatch(increment());
+  };
+
+  const removeOne = () => {
+    dispatch(decrement());
   };
   return (
     <div className="flex flex-col h-full w-full bg-white dark:bg-grey pl-4">
@@ -30,7 +34,7 @@ const BasketPage = () => {
       <div className="pl-3 w-1/4">
         <button
           onClick={resetClick}
-          className=" bg-yellow rounded border-2 border-yellow w-1/2  dark:border-grey"
+          className=" bg-yellow rounded border-2 border-yellow w-1/5 h-full  dark:border-grey"
         >
           Clear Basket
         </button>

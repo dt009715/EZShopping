@@ -25,7 +25,8 @@ function App() {
           <h1 className="text-3xl font-bold dark:text-lightGrey w-1/4">
             EZ SHOPPING
           </h1>
-          <div className="flex w-3/4 justify-end">
+          <div className="flex flex-row w-3/4 justify-end">
+            <div className="w-4 h-4 rounded-full bg-[#1c324f] justify-center mt-2 mr-2 dark:bg-[#ffe603]"></div>
             <button
               onClick={toggleDisplayMode}
               className=" dark:text-lightGrey "
