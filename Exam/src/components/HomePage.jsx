@@ -37,7 +37,7 @@ const HomePage = () => {
   };
 
   return (
-    <ProductList>
+    <ProductList className="dark:bg-grey">
       {products.map((product) => (
         <ProductCard key={product.id}>
           <img src={product.image} alt={product.title} width="100" />

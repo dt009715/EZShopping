@@ -4,7 +4,8 @@ import styled from "styled-components";
 import { updateUser } from "../components/slice/userSlice";
 
 const UserProfile = styled.div`
-  max-width: 400px;
+  max-width: 100%;
+  max-height: 100%;
   text-align: left;
 `;
 
@@ -21,12 +22,18 @@ const UserPage = () => {
   };
 
   return (
-    <UserProfile>
-      <h1>Hi {user.firstName}!</h1>
-      <h2>Customize your profile here</h2>
-      <form onSubmit={handleSubmit}>
+    <UserProfile className=" w-full h-full dark:bg-grey">
+      <h1 className="dark:text-lightGrey font-bold pt-10 text-2xl">
+        Hi {user.firstName}!
+      </h1>
+      <h2 className="dark:text-lightGrey font-bold pt-4 pb-5 text-2xl">
+        Customize your profile here
+      </h2>
+      <form onSubmit={handleSubmit} className="w-full h-full ">
         <div>
-          <label>Your firstname: </label>
+          <label className="dark:text-lightGrey text-xl">
+            Your firstname:{" "}
+          </label>
           <input
             type="text"
             value={firstName}
@@ -35,7 +42,7 @@ const UserPage = () => {
         </div>
         <br />
         <div>
-          <label>Your lastname: </label>
+          <label className="dark:text-lightGrey text-xl">Your lastname: </label>
           <input
             type="text"
             value={lastName}
@@ -44,7 +51,7 @@ const UserPage = () => {
         </div>
         <br />
         <div>
-          <label>Your email: </label>
+          <label className="dark:text-lightGrey text-xl">Your email: </label>
           <input
             type="email"
             value={email}
@@ -52,7 +59,12 @@ const UserPage = () => {
           />
         </div>
         <br />
-        <button type="submit">Save</button>
+        <button
+          type="submit"
+          className="bg-yellow rounded border-2 border-yellow w-20 h-full  dark:border-grey"
+        >
+          Save
+        </button>
       </form>
     </UserProfile>
   );

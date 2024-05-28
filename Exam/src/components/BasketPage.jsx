@@ -103,7 +103,7 @@ const BasketPage = () => {
                 fontSize: "12px",
               }}
             >
-              remove
+              Remove
             </button>
           </ProductCard>
         ))}

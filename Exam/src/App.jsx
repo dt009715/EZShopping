@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Provider, useDispatch, useSelector } from "react-redux";
 import { Link, Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import styled from "styled-components";
@@ -34,25 +34,47 @@ const NavLinks = styled.div`
 
 function App() {
   const dispatch = useDispatch();
-
+  const [darkMode, setDarkMode] = useState(false);
   const totalQuantity = useSelector((state) => state.cart.totalQuantity);
   const user = useSelector((state) => state.user);
 
   useEffect(() => {
+    let savedMode = localStorage.getItem("displayMode");
+    if (!savedMode) {
+      savedMode = "light";
+      setDarkMode(false);
+      localStorage.setItem("displayMode", savedMode);
+    }
+    setDarkMode(savedMode === "dark" ? true : false);
     dispatch(fetchProducts());
   }, [dispatch]);
-
+  const toggleDisplayMode = () => {
+    setDarkMode(!darkMode);
+  };
   return (
     <Provider store={store}>
       <Router>
-        <AppContainer>
-          <NavBar>
-            <Link to="/">
-              <h1>EZ Shopping</h1>
+        <AppContainer className={`${darkMode ? "dark" : ""}`}>
+          <NavBar className="dark:bg-[#404142] w-full">
+            <Link to="/" className="w-full">
+              <h1 className="text-3xl font-bold dark:text-lightGrey w-1/4">
+                EZ Shopping
+              </h1>
             </Link>
-            <NavLinks>
-              <Link to="/user">{user.name}</Link>
-              <Link to="/basket">{totalQuantity} articles</Link>
+            <NavLinks className=" flex flex-row w-3/4 justify-end">
+              <Link to="/user" className="dark:text-lightGrey">
+                {user.name}
+              </Link>
+              <Link to="/basket" className="dark:text-lightGrey">
+                {totalQuantity} articles
+              </Link>
+              <div className="w-4 h-4 rounded-full ml-4 bg-[#1c324f] justify-center mt-1 mr-2 dark:bg-[#ffe603]"></div>
+              <button
+                onClick={toggleDisplayMode}
+                className=" dark:text-lightGrey "
+              >
+                {darkMode ? "Light Mode" : "Dark Mode"}
+              </button>
             </NavLinks>
           </NavBar>
           <Routes>
