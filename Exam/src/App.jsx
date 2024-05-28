@@ -5,7 +5,6 @@ import UserPage from './components/UserPage';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import { useDispatch, useSelector, Provider } from 'react-redux';
 import { fetchProducts } from './slices/productsSlice';
-
 import styled from 'styled-components';
 import store from './store';
 
