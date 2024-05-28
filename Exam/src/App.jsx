@@ -59,6 +59,7 @@ function App() {
             <Routes>
               <Route path="/" element={<HomePage />} />
               <Route path="/user" element={<UserPage />} /> 
+              {/* <Route path="/basket" element={<BasketPage />} /> */}
             </Routes>
           </AppContainer>
         </Router>
