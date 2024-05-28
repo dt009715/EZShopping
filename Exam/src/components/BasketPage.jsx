@@ -1,35 +1,37 @@
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import { removeFromCart, resetValue } from "./slice/cartSlice";
+import {
+  clearCart,
+  removeFromCart,
+  resetValue,
+  updateQuantity,
+} from "./slice/cartSlice";
 const BasketPage = () => {
-  const ProductCard = styled.div`
-    border: 1px solid #ccc;
-    padding: 10px;
-    width: 250px;
-    text-align: center;
+  const QuantityInput = styled.input`
+    width: 50px;
+    margin-right: 10px;
   `;
-
-  const TitleContainer = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-  `;
-
-  const CategoryLabel = styled.p`
-    border-radius: 4px;
-    font-size: 10px;
-  `;
-
   const user = useSelector((state) => state.user);
-  const products = useSelector((state) => state.products.items);
   const totalQuantity = useSelector((state) => state.cart.totalQuantity);
   const dispatch = useDispatch();
 
   const resetClick = () => {
     dispatch(resetValue());
+    dispatch(clearCart());
   };
 
+  const items = useSelector((state) => state.cart.items);
+  const handleRemove = (id) => {
+    dispatch(removeFromCart({ id }));
+  };
+
+  const handleQuantityChange = (id, quantity) => {
+    dispatch(updateQuantity({ id, quantity: parseInt(quantity) }));
+  };
+
+  const handleClearCart = () => {
+    dispatch(clearCart());
+  };
   return (
     <div className="flex flex-col h-full w-full bg-white dark:bg-grey pl-4">
       <div></div>
@@ -46,67 +48,44 @@ const BasketPage = () => {
       <div className="pl-3 w-1/4 pb-4">
         <button
           onClick={resetClick}
-          className=" bg-yellow rounded border-2 border-yellow w-1/5 h-full  dark:border-grey"
+          className=" bg-yellow rounded border-2 border-yellow w-1/5 h-full  dark:border-grey font-bold"
         >
           Clear Basket
         </button>
       </div>
       <div>
-        {products.map((product) => (
-          <ProductCard key={product.id}>
-            <img src={product.image} alt={product.title} width="100" />
-            <TitleContainer>
-              <h2>
-                {product.title}{" "}
-                <CategoryLabel>
-                  <span
-                    style={{
-                      backgroundColor: "#d3d3d3",
-                      opacity: "0.7",
-                      padding: "5px",
-                    }}
-                  >
-                    {product.category}
-                  </span>
-                </CategoryLabel>
-              </h2>
-            </TitleContainer>
-            <p>{product.description}</p>
-            <p>${product.price}</p>
-            <div style={{ marginBottom: "10px" }}>
-              <label style={{ marginRight: "10px" }}>
-                Quantity:{totalQuantity}
-              </label>
-              <input
-                type="number"
-                min="1"
-                style={{ width: "50px" }}
-                id={`quantity-${product.id}`}
-              />
+        {items.length === 0 ? (
+          <p className="dark:text-lightGrey">Your basket is empty</p>
+        ) : (
+          items.map((item) => (
+            <div key={item.id}>
+              <div>
+                <img src={item.image} alt={item.title} width="100" />
+                <h2 className="dark:text-lightGrey text-xl">{item.title}</h2>
+                <p className="dark:text-lightGrey text-xl">${item.price}</p>
+              </div>
+              <div className="flex flex-col">
+                <label className="pb-2 dark:text-lightGrey text-xl">
+                  Quantity
+                </label>
+                <QuantityInput
+                  type="number"
+                  value={item.quantity}
+                  onChange={(e) =>
+                    handleQuantityChange(item.id, e.target.value)
+                  }
+                  className="mb-2"
+                />
+                <button
+                  onClick={() => handleRemove(item.id)}
+                  className=" bg-yellow rounded border-2 border-yellow w-20 h-full mb-3 dark:border-grey font-bold"
+                >
+                  Remove
+                </button>
+              </div>
             </div>
-            <button
-              onClick={() =>
-                removeFromCart(
-                  product,
-                  parseInt(
-                    document.getElementById(`quantity-${product.id}`).value
-                  )
-                )
-              }
-              style={{
-                backgroundColor: "#f0c040",
-                border: "none",
-                padding: "10px 20px",
-                cursor: "pointer",
-                borderRadius: "4px",
-                textAlign: "center",
-                fontSize: "12px",
-              }}
-            >
-              Remove
-            </button>
-          </ProductCard>
-        ))}
+          ))
+        )}
       </div>
     </div>
   );

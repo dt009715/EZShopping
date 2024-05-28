@@ -61,12 +61,13 @@ function App() {
                 EZ Shopping
               </h1>
             </Link>
-            <NavLinks className=" flex flex-row w-3/4 justify-end">
-              <Link to="/user" className="dark:text-lightGrey">
+            <NavLinks className=" flex flex-row w-3/4 justify-end ">
+              <Link to="/user" className="dark:text-lightGrey ">
                 {user.name}
               </Link>
-              <Link to="/basket" className="dark:text-lightGrey">
-                {totalQuantity} articles
+              <Link to="/basket" className="dark:text-lightGrey flex flex-row">
+                <p className="font-bold">{totalQuantity}</p>{" "}
+                <p className="pl-1">articles</p>
               </Link>
               <div className="w-4 h-4 rounded-full ml-4 bg-[#1c324f] justify-center mt-1 mr-2 dark:bg-[#ffe603]"></div>
               <button

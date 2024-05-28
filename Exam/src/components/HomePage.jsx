@@ -78,15 +78,7 @@ const HomePage = () => {
                 )
               )
             }
-            style={{
-              backgroundColor: "#f0c040",
-              border: "none",
-              padding: "10px 20px",
-              cursor: "pointer",
-              borderRadius: "4px",
-              textAlign: "center",
-              fontSize: "12px",
-            }}
+            className="bg-yellow border-none  cursor-pointer rounded text-center text-xs  font-bold w-1/2 h-10"
           >
             Add to basket
           </button>
