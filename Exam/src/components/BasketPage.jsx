@@ -1,47 +1,95 @@
-import { useDispatch, useSelector } from "react-redux";
-// import { User } from "./User";
-import { selectCount } from "./selector";
-import { decrement, increment, resetValue } from "./slice/counterSlice";
+// src/components/BasketPage.js
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import styled from 'styled-components';
+import { removeFromCart, updateQuantity, clearCart } from '../slices/cartSlice';
+
+const BasketContainer = styled.div`
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+`;
+
+const BasketItem = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ddd;
+  padding: 10px 0;
+`;
+
+const ItemInfo = styled.div`
+  flex-grow: 1;
+`;
+
+const QuantityInput = styled.input`
+  width: 50px;
+  margin-right: 10px;
+`;
+
+const RemoveButton = styled.button`
+  background-color: #ff6b6b;
+  border: none;
+  color: white;
+  padding: 5px 10px;
+  cursor: pointer;
+`;
+
+const ClearButton = styled.button`
+  background-color: #f0c040;
+  border: none;
+  color: black;
+  padding: 10px 20px;
+  cursor: pointer;
+  margin-top: 20px;
+`;
 
 const BasketPage = () => {
-  const count = useSelector(selectCount);
+  const items = useSelector((state) => state.cart.items);
+  const totalQuantity = useSelector((state) => state.cart.totalQuantity);
   const dispatch = useDispatch();
 
-  const resetClick = () => {
-    dispatch(resetValue());
+  const handleRemove = (id) => {
+    dispatch(removeFromCart({ id }));
   };
 
-  const add = () => {
-    dispatch(increment());
+  const handleQuantityChange = (id, quantity) => {
+    dispatch(updateQuantity({ id, quantity: parseInt(quantity) }));
   };
 
-  const removeOne = () => {
-    dispatch(decrement());
+  const handleClearCart = () => {
+    dispatch(clearCart());
   };
+
   return (
-    <div className="flex flex-col h-full w-full bg-white dark:bg-grey pl-4">
-      <div></div>
-      <div>
-        <h1 className="font-bold pt-10 pb-5 text-2xl dark:text-lightGrey">
-          Hi {User.name}!
-        </h1>
-      </div>
-      <div>
-        <p className="font-bold font-graphik text-2xl pb-8 dark:text-lightGrey">
-          There are {count} items in your basket
-        </p>
-      </div>
-      <div className="pl-3 w-1/4">
-        <button
-          onClick={resetClick}
-          className=" bg-yellow rounded border-2 border-yellow w-1/5 h-full  dark:border-grey"
-        >
-          Clear Basket
-        </button>
-      </div>
-      <div></div>
-    </div>
+    <BasketContainer>
+      <h1>Your Basket</h1>
+      {items.length === 0 ? (
+        <p>Your basket is empty</p>
+      ) : (
+        items.map((item) => (
+          <BasketItem key={item.id}>
+            <ItemInfo>
+            <img src={item.image} alt={item.title} width="100" />
+              <h2>{item.title}</h2>
+              <p>${item.price}</p>
+            </ItemInfo>
+            <div>
+              <QuantityInput
+                type="number"
+                value={item.quantity}
+                onChange={(e) => handleQuantityChange(item.id, e.target.value)}
+              />
+              <RemoveButton onClick={() => handleRemove(item.id)}>Remove</RemoveButton>
+            </div>
+          </BasketItem>
+        ))
+      )}
+      <ClearButton onClick={handleClearCart}>Clear Basket</ClearButton>
+      <p>Total items: {totalQuantity}</p>
+    </BasketContainer>
   );
 };
 
 export default BasketPage;
+

@@ -54,7 +54,7 @@ function App() {
               </Link>
               <NavLinks>
                 <Link to="/user">{user.name}</Link>
-                <span>{totalQuantity} articles</span>
+                <Link to="/basket">{totalQuantity} articles</Link>
               </NavLinks>
             </NavBar>
             <Routes>
