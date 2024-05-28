@@ -2,6 +2,7 @@ import './App.css';
 import React, { useEffect } from 'react';
 import HomePage from './components/HomePage';
 import UserPage from './components/UserPage';
+import BasketPage from './components/BasketPage';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import { useDispatch, useSelector, Provider } from 'react-redux';
 import { fetchProducts } from './slices/productsSlice';
@@ -59,7 +60,7 @@ function App() {
             <Routes>
               <Route path="/" element={<HomePage />} />
               <Route path="/user" element={<UserPage />} /> 
-              {/* <Route path="/basket" element={<BasketPage />} /> */}
+              <Route path="/basket" element={<BasketPage />} />
             </Routes>
           </AppContainer>
         </Router>
