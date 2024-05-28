@@ -19,9 +19,9 @@ function App() {
     setDarkMode(!darkMode);
   };
   return (
-    <div className="h-full dark:bg-grey">
+    <div className="h-full dark:bg-[#404142]">
       <div className={`${darkMode ? "dark" : ""} h-full`}>
-        <div className=" p-4 flex w-full flex-row bg-yellow dark:bg-grey dark:bg-[#404142]">
+        <div className=" p-4 flex w-full flex-row bg-yellow  dark:bg-[#404142]">
           <h1 className="text-3xl font-bold dark:text-lightGrey w-1/4">
             EZ SHOPPING
           </h1>

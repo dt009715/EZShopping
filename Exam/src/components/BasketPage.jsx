@@ -15,22 +15,22 @@ const BasketPage = () => {
     dispatch(increment());
   };
   return (
-    <div className="flex flex-col h-full w-full bg-white dark:bg-grey">
+    <div className="flex flex-col h-full w-full bg-white dark:bg-grey pl-4">
       <div></div>
       <div>
         <h1 className="font-bold pt-10 pb-5 text-2xl dark:text-lightGrey">
-          Hi {User.name}
+          Hi {User.name}!
         </h1>
       </div>
       <div>
-        <p className="font-bold font-graphik text-2xl pb-6 dark:text-lightGrey">
+        <p className="font-bold font-graphik text-2xl pb-8 dark:text-lightGrey">
           There are {count} items in your basket
         </p>
       </div>
-      <div className="pl-3">
+      <div className="pl-3 w-1/4">
         <button
           onClick={resetClick}
-          className=" bg-yellow rounded border-2 border-yellow w-1/6  dark:border-grey"
+          className=" bg-yellow rounded border-2 border-yellow w-1/2  dark:border-grey"
         >
           Clear Basket
         </button>

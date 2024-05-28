@@ -1,5 +1,5 @@
 const User = {
-  name: "Allan",
+  name: "Alan",
 };
 
 export { User };
