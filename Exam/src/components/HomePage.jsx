@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { addToCart } from '../slices/cartSlice';
 import styled from 'styled-components';
@@ -32,6 +32,25 @@ const HomePage = () => {
   const products = useSelector((state) => state.products.items);
   const dispatch = useDispatch();
 
+  const [quantities, setQuantities] = useState({});
+
+  useEffect(() => {
+    if (products.length > 0) {
+      const initialQuantities = products.reduce((acc, product) => {
+        acc[product.id] = 1;
+        return acc;
+      }, {});
+      setQuantities(initialQuantities);
+    }
+  }, [products]);
+
+  const handleQuantityChange = (id, value) => {
+    setQuantities({
+      ...quantities,
+      [id]: value,
+    });
+  };
+
   const handleAddToCart = (product, quantity) => {
     dispatch(addToCart({ ...product, quantity }));
   };
@@ -43,11 +62,18 @@ const HomePage = () => {
           <img src={product.image} alt={product.title} width="100" />
           <TitleContainer>
             <h2>
-              {product.title} <CategoryLabel><span style={{
-                backgroundColor: '#d3d3d3',
-                opacity: '0.7',
-                padding: '5px'
-              }}>{product.category}</span></CategoryLabel>
+              {product.title}{' '}
+              <CategoryLabel>
+                <span
+                  style={{
+                    backgroundColor: '#d3d3d3',
+                    opacity: '0.7',
+                    padding: '5px',
+                  }}
+                >
+                  {product.category}
+                </span>
+              </CategoryLabel>
             </h2>
           </TitleContainer>
           <p>{product.description}</p>
@@ -57,15 +83,15 @@ const HomePage = () => {
             <input
               type="number"
               min="1"
-              defaultValue="1"
+              value={quantities[product.id] || 1}
+              onChange={(e) =>
+                handleQuantityChange(product.id, parseInt(e.target.value))
+              }
               style={{ width: '50px' }}
-              id={`quantity-${product.id}`}
             />
           </div>
           <button
-            onClick={() =>
-              handleAddToCart(product, parseInt(document.getElementById(`quantity-${product.id}`).value))
-            }
+            onClick={() => handleAddToCart(product, quantities[product.id])}
             style={{
               backgroundColor: '#f0c040',
               border: 'none',
@@ -85,5 +111,7 @@ const HomePage = () => {
 };
 
 export default HomePage;
+
+
 
 

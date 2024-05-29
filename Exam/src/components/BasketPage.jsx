@@ -6,12 +6,15 @@ import {
   resetValue,
   updateQuantity,
 } from "../slices/cartSlice";
+
+
 const BasketPage = () => {
   const QuantityInput = styled.input`
     width: 50px;
     margin-right: 10px;
-    border: 1px solid #000
+    border: 1px solid #000;
   `;
+
   const user = useSelector((state) => state.user);
   const totalQuantity = useSelector((state) => state.cart.totalQuantity);
   const dispatch = useDispatch();
@@ -22,17 +25,22 @@ const BasketPage = () => {
   };
 
   const items = useSelector((state) => state.cart.items);
+
   const handleRemove = (id) => {
     dispatch(removeFromCart({ id }));
   };
 
   const handleQuantityChange = (id, quantity) => {
+    if (quantity < 1) {
+      quantity = 1;
+    }
     dispatch(updateQuantity({ id, quantity: parseInt(quantity) }));
   };
 
   const handleClearCart = () => {
     dispatch(clearCart());
   };
+
   return (
     <div className="flex flex-col h-full w-full bg-white dark:bg-grey pl-4">
       <div></div>
@@ -49,7 +57,7 @@ const BasketPage = () => {
       <div className="pl-3 w-1/4 pb-4">
         <button
           onClick={resetClick}
-          className=" bg-yellow rounded border-2 border-yellow w-1/5 h-full  dark:border-grey font-bold"
+          className=" bg-yellow rounded border-2 border-yellow w-1/5 h-full dark:border-grey font-bold"
         >
           Clear Basket
         </button>
@@ -93,4 +101,5 @@ const BasketPage = () => {
 };
 
 export default BasketPage;
+
 

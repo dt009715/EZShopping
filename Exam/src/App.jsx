@@ -8,8 +8,8 @@ import { useDispatch, useSelector, Provider } from 'react-redux';
 import { fetchProducts } from './slices/productsSlice';
 import styled from 'styled-components';
 import store from './store';
-
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser, faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 
 const AppContainer = styled.div`
   background-color: ${props => props.theme.background};
@@ -27,10 +27,20 @@ const NavBar = styled.nav`
 `;
 
 const NavLinks = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 20px;
+
   a {
     margin: 0 10px;
     text-decoration: none;
     color: inherit;
+    display: flex;
+    align-items: center;
+  }
+
+  span {
+    margin-left: 5px;
   }
 `;
 
@@ -46,28 +56,34 @@ function App() {
 
   return (
     <Provider store={store}>
-        <Router>
-          <AppContainer>
-            <NavBar>
-              <Link to="/">
-                <h1>EZ Shopping</h1>
+      <Router>
+        <AppContainer>
+          <NavBar>
+            <Link to="/">
+              <h1>EZ Shopping</h1>
+            </Link>
+            <NavLinks>
+              <Link to="/user">
+                <FontAwesomeIcon icon={faUser} />
+                <span>{user.name}</span>
               </Link>
-              <NavLinks>
-                <Link to="/user">{user.name}</Link>
-                <Link to="/basket">{totalQuantity} articles</Link>
-              </NavLinks>
-            </NavBar>
-            <Routes>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/user" element={<UserPage />} /> 
-              <Route path="/basket" element={<BasketPage />} />
-            </Routes>
-          </AppContainer>
-        </Router>
-      
+              <Link to="/basket">
+                <FontAwesomeIcon icon={faShoppingCart} />
+                <span>{totalQuantity} articles</span>
+              </Link>
+            </NavLinks>
+          </NavBar>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/user" element={<UserPage />} /> 
+            <Route path="/basket" element={<BasketPage />} />
+          </Routes>
+        </AppContainer>
+      </Router>
     </Provider>
   );
 }
 
 export default App;
+
 
