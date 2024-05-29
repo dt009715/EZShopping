@@ -10,7 +10,6 @@ const BasketPage = () => {
   const QuantityInput = styled.input`
     width: 50px;
     margin-right: 10px;
-    border: 1px solid #000
   `;
   const user = useSelector((state) => state.user);
   const totalQuantity = useSelector((state) => state.cart.totalQuantity);
@@ -27,6 +26,9 @@ const BasketPage = () => {
   };
 
   const handleQuantityChange = (id, quantity) => {
+    if (quantity < 1) {
+      quantity = 1;
+    }
     dispatch(updateQuantity({ id, quantity: parseInt(quantity) }));
   };
 

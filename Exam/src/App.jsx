@@ -1,3 +1,5 @@
+import { faShoppingCart, faUser } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
 import { Provider, useDispatch, useSelector } from "react-redux";
 import { Link, Route, BrowserRouter as Router, Routes } from "react-router-dom";
@@ -63,9 +65,17 @@ function App() {
             </Link>
             <NavLinks className=" flex flex-row w-3/4 justify-end ">
               <Link to="/user" className="dark:text-lightGrey ">
+                <FontAwesomeIcon
+                  icon={faUser}
+                  className="content-center mr-2"
+                />
                 {user.name}
               </Link>
               <Link to="/basket" className="dark:text-lightGrey flex flex-row">
+                <FontAwesomeIcon
+                  icon={faShoppingCart}
+                  className="content-center mr-2 mt-1"
+                />
                 <p className="font-bold">{totalQuantity}</p>{" "}
                 <p className="pl-1">articles</p>
               </Link>

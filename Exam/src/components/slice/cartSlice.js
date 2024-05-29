@@ -23,12 +23,10 @@ const cartSlice = createSlice({
 
       if (itemIndex !== -1) {
         const item = state.items[itemIndex];
+        state.totalQuantity -= item.quantity;
+        state.items.splice(itemIndex, 1);
 
-        if (state.totalQuantity > 1) {
-          state.totalQuantity -= item.quantity;
-        }
-        if (state.totalQuantity <= 0) {
-          state.items.splice(itemIndex, 1);
+        if (state.totalQuantity < 0) {
           state.totalQuantity = 0;
         }
       }
@@ -37,14 +35,16 @@ const cartSlice = createSlice({
       const { id, quantity } = action.payload;
       const item = state.items.find((item) => item.id === id);
       if (item) {
+        state.totalQuantity += quantity - item.quantity;
         item.quantity = quantity;
       }
     },
-    resetValue: (state, action) => {
+    resetValue: (state) => {
       state.totalQuantity = 0;
     },
     clearCart: (state) => {
       state.items = [];
+      state.totalQuantity = 0;
     },
   },
 });
