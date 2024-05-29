@@ -81,9 +81,11 @@ const HomePage = () => {
             <input
               type="number"
               min="1"
-              defaultValue="1"
-              style={{ width: "50px" }}
-              id={`quantity-${product.id}`}
+              value={quantities[product.id] || 1}
+              onChange={(e) =>
+                handleQuantityChange(product.id, parseInt(e.target.value))
+              }
+              className="w-1/4 pl-2"
             />
           </div>
           <button
