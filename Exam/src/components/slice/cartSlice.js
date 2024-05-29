@@ -27,8 +27,9 @@ const cartSlice = createSlice({
         if (state.totalQuantity > 1) {
           state.totalQuantity -= item.quantity;
         }
-        if (state.totalQuantity == 0) {
+        if (state.totalQuantity <= 0) {
           state.items.splice(itemIndex, 1);
+          state.totalQuantity = 0;
         }
       }
     },
