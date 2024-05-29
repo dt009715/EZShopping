@@ -85,17 +85,11 @@ const HomePage = () => {
               onChange={(e) =>
                 handleQuantityChange(product.id, parseInt(e.target.value))
               }
+              className="w-1/4 pl-2 ml-2"
             />
           </div>
           <button
-            onClick={() =>
-              handleAddToCart(
-                product,
-                parseInt(
-                  document.getElementById(`quantity-${product.id}`).value
-                )
-              )
-            }
+            onClick={() => handleAddToCart(product, quantities[product.id])}
             className="bg-yellow border-none  cursor-pointer rounded text-center text-xs  font-bold w-1/2 h-10"
           >
             Add to basket
