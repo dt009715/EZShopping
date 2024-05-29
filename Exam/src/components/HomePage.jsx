@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { addToCart } from "../components/slice/cartSlice";
@@ -31,7 +31,24 @@ const CategoryLabel = styled.p`
 const HomePage = () => {
   const products = useSelector((state) => state.products.items);
   const dispatch = useDispatch();
+  const [quantities, setQuantities] = useState({});
 
+  useEffect(() => {
+    if (products.length > 0) {
+      const initialQuantities = products.reduce((acc, product) => {
+        acc[product.id] = 1;
+        return acc;
+      }, {});
+      setQuantities(initialQuantities);
+    }
+  }, [products]);
+
+  const handleQuantityChange = (id, value) => {
+    setQuantities({
+      ...quantities,
+      [id]: value,
+    });
+  };
   const handleAddToCart = (product, quantity) => {
     dispatch(addToCart({ ...product, quantity }));
   };
@@ -64,9 +81,10 @@ const HomePage = () => {
             <input
               type="number"
               min="1"
-              defaultValue="1"
-              style={{ width: "50px" }}
-              id={`quantity-${product.id}`}
+              value={quantities[product.id] || 1}
+              onChange={(e) =>
+                handleQuantityChange(product.id, parseInt(e.target.value))
+              }
             />
           </div>
           <button

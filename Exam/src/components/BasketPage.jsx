@@ -26,6 +26,9 @@ const BasketPage = () => {
   };
 
   const handleQuantityChange = (id, quantity) => {
+    if (quantity < 1) {
+      quantity = 1;
+    }
     dispatch(updateQuantity({ id, quantity: parseInt(quantity) }));
   };
 
