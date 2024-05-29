@@ -65,7 +65,9 @@ const HomePage = () => {
               type="number"
               min="1"
               defaultValue="1"
-              style={{ width: "50px" }}
+              style={{ width: "50px",
+                border: "1px solid #000"
+               }}
               id={`quantity-${product.id}`}
             />
           </div>

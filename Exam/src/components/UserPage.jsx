@@ -34,7 +34,9 @@ const UserPage = () => {
           <label className="dark:text-lightGrey text-xl">
             Your firstname:{" "}
           </label>
-          <input
+          <input style={{
+            border: "1px solid #000"
+          }}
             type="text"
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
@@ -43,7 +45,9 @@ const UserPage = () => {
         <br />
         <div>
           <label className="dark:text-lightGrey text-xl">Your lastname: </label>
-          <input
+          <input style={{
+            border: "1px solid #000"
+          }}
             type="text"
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
@@ -52,7 +56,9 @@ const UserPage = () => {
         <br />
         <div>
           <label className="dark:text-lightGrey text-xl">Your email: </label>
-          <input
+          <input style={{
+            border: "1px solid #000"
+          }}
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
