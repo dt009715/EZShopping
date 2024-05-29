@@ -1,8 +1,7 @@
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { addToCart } from "../components/slice/cartSlice";
-import React, { useEffect, useState } from , { useEffect, useState };
-from "react";
 
 const ProductList = styled.div`
   display: flex;
