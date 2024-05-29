@@ -67,7 +67,7 @@ const UserPage = () => {
         <br />
         <button
           type="submit"
-          className="bg-yellow rounded border-2 border-yellow w-20 h-full  dark:border-grey"
+          className="bg-yellow rounded border-2 border-yellow w-20   dark:border-grey"
         >
           Save
         </button>

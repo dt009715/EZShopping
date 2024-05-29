@@ -54,7 +54,7 @@ function App() {
   return (
     <Provider store={store}>
       <Router>
-        <AppContainer className={`${darkMode ? "dark" : ""}`}>
+        <AppContainer className={`${darkMode ? "dark" : ""} h-full`}>
           <NavBar className="dark:bg-[#404142] w-full">
             <Link to="/" className="w-full">
               <h1 className="text-3xl font-bold dark:text-lightGrey w-1/4">

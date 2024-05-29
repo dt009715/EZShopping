@@ -30,12 +30,8 @@ const BasketPage = () => {
     dispatch(updateQuantity({ id, quantity: parseInt(quantity) }));
   };
 
-  const handleClearCart = () => {
-    dispatch(clearCart());
-  };
   return (
     <div className="flex flex-col h-full w-full bg-white dark:bg-grey pl-4">
-      <div></div>
       <div>
         <h1 className="font-bold pt-10 pb-5 text-2xl dark:text-lightGrey">
           Hi {user.firstName}!
@@ -78,7 +74,7 @@ const BasketPage = () => {
                   className="mb-2"
                 />
                 <button
-                  onClick={() => handleRemove(item.id)}
+                  onClick={(e) => handleRemove(item.id, e.target.value)}
                   className=" bg-yellow rounded border-2 border-yellow w-20 h-full mb-3 dark:border-grey font-bold"
                 >
                   Remove
