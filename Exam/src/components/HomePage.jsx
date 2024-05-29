@@ -85,6 +85,9 @@ const HomePage = () => {
               onChange={(e) =>
                 handleQuantityChange(product.id, parseInt(e.target.value))
               }
+              style={{
+                border: "1px solid #000"
+              }}
               className="w-1/4 pl-2 ml-2"
             />
           </div>

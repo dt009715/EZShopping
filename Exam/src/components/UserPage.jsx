@@ -38,6 +38,9 @@ const UserPage = () => {
             type="text"
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
+            style={{
+              border: "1px solid #000"
+            }}
           />
         </div>
         <br />
@@ -47,6 +50,9 @@ const UserPage = () => {
             type="text"
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
+            style={{
+              border: "1px solid #000"
+            }}
           />
         </div>
         <br />
@@ -56,6 +62,9 @@ const UserPage = () => {
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            style={{
+              border: "1px solid #000"
+            }}
           />
         </div>
         <br />
