@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { addToCart } from "../components/slice/cartSlice";
+import React, { useEffect, useState } from , { useEffect, useState };
+from "react";
 
 const ProductList = styled.div`
   display: flex;
@@ -81,11 +82,9 @@ const HomePage = () => {
             <input
               type="number"
               min="1"
-              value={quantities[product.id] || 1}
-              onChange={(e) =>
-                handleQuantityChange(product.id, parseInt(e.target.value))
-              }
-              className="w-1/4 pl-2 ml-2"
+              defaultValue="1"
+              style={{ width: "50px" }}
+              id={`quantity-${product.id}`}
             />
           </div>
           <button
