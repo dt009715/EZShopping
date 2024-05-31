@@ -1,10 +1,14 @@
-import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { clearCart, removeFromCart, resetValue, updateQuantity } from "./slice/cartSlice";
+import {
+  clearCart,
+  removeFromCart,
+  resetValue,
+  updateQuantity,
+} from "./slice/cartSlice";
 
 const BasketPage = ({ darkMode }) => {
-
   const QuantityInput = styled.input`
     width: 50px;
     margin-right: 10px;
@@ -52,9 +56,12 @@ const BasketPage = ({ darkMode }) => {
           >
             Clear Basket
           </button>
-          <Link to="/checkout" 
-            className={`bg-${darkMode ? "white" : "black"} rounded border-2 ${
-            darkMode ? "border-black text-black" : "border-black text-black"
+          <Link
+            to="/checkout"
+            className={`bg-${
+              darkMode ? "white" : "black"
+            } rounded border-2 bg-yellow border-yellow  ${
+              darkMode ? "border-black text-black" : "border-black text-black"
             } w-full font-bold flex justify-center items-center`}
           >
             Validate Basket
@@ -102,5 +109,3 @@ const BasketPage = ({ darkMode }) => {
 };
 
 export default BasketPage;
-
-
