@@ -23,7 +23,7 @@ const UserPage = () => {
 
   return (
     <UserProfile className=" w-full h-full dark:bg-grey">
-      <h1 className="dark:text-lightGrey font-bold pt-10 text-2xl">
+      <h1 className="font-serif dark:text-lightGrey font-bold pt-10 text-2xl">
         Hi {user.firstName}!
       </h1>
       <h2 className="dark:text-lightGrey font-bold pt-4 pb-5 text-2xl">

@@ -8,6 +8,7 @@ import "./App.css";
 import BasketPage from "./components/BasketPage";
 import HomePage from "./components/HomePage";
 import UserPage from "./components/UserPage";
+import CheckoutPage from "./components/CheckoutPage"
 import { fetchProducts } from "./components/slice/productsSlice";
 import store from "./components/store";
 
@@ -59,7 +60,7 @@ function App() {
         <AppContainer className={`${darkMode ? "dark" : ""} h-full`}>
           <NavBar className="dark:bg-[#404142] w-full">
             <Link to="/" className="w-full">
-              <h1 className="text-3xl font-bold dark:text-lightGrey w-1/4">
+              <h1 className="font-serif text-3xl font-bold dark:text-lightGrey w-1/4">
                 EZ Shopping
               </h1>
             </Link>
@@ -91,7 +92,8 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/user" element={<UserPage />} />
-            <Route path="/basket" element={<BasketPage />} />
+            <Route path="/basket" element={<BasketPage darkMode={darkMode} />} />
+            <Route path="/checkout" element={<CheckoutPage />} />
           </Routes>
         </AppContainer>
       </Router>
