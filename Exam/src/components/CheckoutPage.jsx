@@ -39,6 +39,7 @@ const CheckoutPage = () => {
           </div>
         );
       })}
+      <br />
       <h2 className="dark:text-lightGrey text-lg">Total Items: {totalItems}</h2>
       <h2 className="dark:text-lightGrey text-lg">
         Total Price: ${totalPrice.toFixed(2)}
