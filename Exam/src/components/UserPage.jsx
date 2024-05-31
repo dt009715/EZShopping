@@ -1,13 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import styled from "styled-components";
 import { updateUser } from "../components/slice/userSlice";
-
-const UserProfile = styled.div`
-  max-width: 100%;
-  max-height: 100%;
-  text-align: left;
-`;
 
 const UserPage = () => {
   const user = useSelector((state) => state.user);
@@ -22,11 +15,11 @@ const UserPage = () => {
   };
 
   return (
-    <UserProfile className=" w-full h-full dark:bg-grey">
-      <h1 className="font-serif dark:text-lightGrey font-bold pt-10 text-2xl">
+    <div className=" w-full h-full dark:bg-grey pl-2">
+      <h1 className="font-serif dark:text-lightGrey font-bold pt-10 text-4xl">
         Hi {user.firstName}!
       </h1>
-      <h2 className="dark:text-lightGrey font-bold pt-4 pb-5 text-2xl">
+      <h2 className="dark:text-lightGrey pt-4 pb-5 text-2xl">
         Customize your profile here
       </h2>
       <form onSubmit={handleSubmit} className="w-full h-full ">
@@ -38,9 +31,7 @@ const UserPage = () => {
             type="text"
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
-            style={{
-              border: "1px solid #000"
-            }}
+            className="border-solid border pl-1"
           />
         </div>
         <br />
@@ -50,9 +41,7 @@ const UserPage = () => {
             type="text"
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
-            style={{
-              border: "1px solid #000"
-            }}
+            className="border-solid border pl-1"
           />
         </div>
         <br />
@@ -62,9 +51,7 @@ const UserPage = () => {
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            style={{
-              border: "1px solid #000"
-            }}
+            className="border-solid border pl-1"
           />
         </div>
         <br />
@@ -75,7 +62,7 @@ const UserPage = () => {
           Save
         </button>
       </form>
-    </UserProfile>
+    </div>
   );
 };
 

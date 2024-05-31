@@ -1,32 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import styled from "styled-components";
 import { addToCart } from "../components/slice/cartSlice";
-
-const ProductList = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-`;
-
-const ProductCard = styled.div`
-  border: 1px solid #ccc;
-  padding: 10px;
-  width: 250px;
-  text-align: center;
-`;
-
-const TitleContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-`;
-
-const CategoryLabel = styled.p`
-  border-radius: 4px;
-  font-size: 10px;
-`;
 
 const HomePage = () => {
   const products = useSelector((state) => state.products.items);
@@ -54,30 +28,27 @@ const HomePage = () => {
   };
 
   return (
-    <ProductList className="dark:bg-grey">
+    <div className="dark:bg-grey flex flex-wrap gap-5 justify-center pt-3">
       {products.map((product) => (
-        <ProductCard key={product.id}>
-          <img src={product.image} alt={product.title} width="100" />
-          <TitleContainer>
+        <div
+          className="border border-solid border-grey p-2.5 w-1/6 text-center justify-center items-center flex flex-col dark:border-white"
+          key={product.id}
+        >
+          <img src={product.image} alt={product.title} className="w-1/2 pb-2" />
+          <div className="flex justify-center items-center gap-2.5">
             <h2>
-              {product.title}{" "}
-              <CategoryLabel>
-                <span
-                  style={{
-                    backgroundColor: "#d3d3d3",
-                    opacity: "0.7",
-                    padding: "5px",
-                  }}
-                >
+              <p className="pb-2">{product.title} </p>
+              <div className="rounded text-xs">
+                <span className="bg-[#d3d3d3] opacity-70 p-1">
                   {product.category}
                 </span>
-              </CategoryLabel>
+              </div>
             </h2>
-          </TitleContainer>
-          <p>{product.description}</p>
+          </div>
+          <p className="pt-2">{product.description}</p>
           <p>${product.price}</p>
-          <div style={{ marginBottom: "10px" }}>
-            <label style={{ marginRight: "10px" }}>Quantity:</label>
+          <div className="mb-2.5">
+            <label className="mr-2.5">Quantity:</label>
             <input
               type="number"
               min="1"
@@ -85,10 +56,7 @@ const HomePage = () => {
               onChange={(e) =>
                 handleQuantityChange(product.id, parseInt(e.target.value))
               }
-              style={{
-                border: "1px solid #000",
-              }}
-              className="w-1/4 pl-2 ml-2"
+              className="w-1/4 pl-2 ml-2 border border-solid border-black"
             />
           </div>
           <button
@@ -97,9 +65,9 @@ const HomePage = () => {
           >
             Add to basket
           </button>
-        </ProductCard>
+        </div>
       ))}
-    </ProductList>
+    </div>
   );
 };
 

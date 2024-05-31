@@ -1,6 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import styled from "styled-components";
 import {
   clearCart,
   removeFromCart,
@@ -8,13 +7,7 @@ import {
   updateQuantity,
 } from "./slice/cartSlice";
 
-const BasketPage = ({ darkMode }) => {
-  const QuantityInput = styled.input`
-    width: 50px;
-    margin-right: 10px;
-    border: 1px solid #000;
-  `;
-
+const BasketPage = () => {
   const user = useSelector((state) => state.user);
   const totalQuantity = useSelector((state) => state.cart.totalQuantity);
   const items = useSelector((state) => state.cart.items);
@@ -50,22 +43,20 @@ const BasketPage = ({ darkMode }) => {
       </div>
       <div className="pl-3 w-1/4 pb-4">
         <div className="flex flex-col">
-          <button
-            onClick={resetClick}
-            className="bg-yellow rounded border-2 border-yellow w-full mb-2 dark:border-grey font-bold"
-          >
-            Clear Basket
-          </button>
-          <Link
-            to="/checkout"
-            className={`bg-${
-              darkMode ? "white" : "black"
-            } rounded border-2 bg-yellow border-yellow  ${
-              darkMode ? "border-black text-black" : "border-black text-black"
-            } w-full font-bold flex justify-center items-center`}
-          >
-            Validate Basket
-          </Link>
+          <div className="flex gap-2">
+            <Link
+              to="/checkout"
+              className="bg-yellow text-center rounded border-2 border-yellow w-1/4 mb-2 dark:border-grey font-bold"
+            >
+              Validate Basket
+            </Link>
+            <button
+              onClick={resetClick}
+              className="bg-yellow rounded border-2 border-yellow w-1/4 mb-2 dark:border-grey font-bold "
+            >
+              Clear Basket
+            </button>
+          </div>
         </div>
       </div>
       <div>
@@ -85,13 +76,13 @@ const BasketPage = ({ darkMode }) => {
                 <label className="pb-2 dark:text-lightGrey text-xl">
                   Quantity
                 </label>
-                <QuantityInput
+                <input
                   type="number"
                   value={item.quantity}
                   onChange={(e) =>
                     handleQuantityChange(item.id, e.target.value)
                   }
-                  className="mb-2"
+                  className="mb-2 w-[50px] border border-solid pl-2"
                 />
                 <button
                   onClick={() => handleRemove(item.id)}
